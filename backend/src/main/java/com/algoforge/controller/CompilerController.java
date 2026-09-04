@@ -13,6 +13,7 @@ import java.util.Map;
 public class CompilerController {
 
     private final CompilerService compilerService;
+    private final com.algoforge.service.AiAnalysisService aiAnalysisService;
 
     @PostMapping("/execute")
     public ApiResponse<Map<String, Object>> executeCode(@RequestBody Map<String, Object> payload) {
@@ -26,5 +27,17 @@ public class CompilerController {
 
         Map<String, Object> result = compilerService.executeCode(language, version, code);
         return ApiResponse.success(result, "Code execution completed");
+    }
+
+    @PostMapping("/analyze")
+    public ApiResponse<String> analyzeComplexity(@RequestBody Map<String, Object> payload) {
+        String code = payload.get("code") != null ? payload.get("code").toString() : null;
+        
+        if (code == null || code.trim().isEmpty()) {
+            return ApiResponse.error("Missing code to analyze");
+        }
+        
+        String analysis = aiAnalysisService.analyzeComplexity(code);
+        return ApiResponse.success(analysis, "Complexity analyzed successfully");
     }
 }

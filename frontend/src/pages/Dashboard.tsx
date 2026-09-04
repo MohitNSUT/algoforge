@@ -5,14 +5,14 @@ import { motion } from 'framer-motion'
 export default function Dashboard() {
   return (
     <div className="container mx-auto py-5">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="row align-items-center mb-5 pb-5"
       >
         <div className="col-lg-7">
           <h1 className="display-3 fw-bold mb-4" style={{ letterSpacing: '-1px' }}>
-            Understand Algorithms.<br/>
+            Understand Algorithms.<br />
             <span style={{ color: 'var(--accent-primary)' }}>Don't Just Run Them.</span>
           </h1>
           <p className="lead text-muted mb-5 w-75">
@@ -27,35 +27,6 @@ export default function Dashboard() {
             </Link>
           </div>
         </div>
-        <div className="col-lg-5">
-          <div className="bg-dark rounded p-4 position-relative border border-secondary" style={{ backgroundColor: 'var(--bg-secondary) !important' }}>
-            <div className="d-flex align-items-center gap-3 mb-4">
-              <div className="bg-primary bg-opacity-10 p-3 rounded-circle text-primary">
-                <GitMerge size={24} />
-              </div>
-              <div>
-                <h5 className="mb-0 fw-bold">Merge Sort Execution</h5>
-                <small className="text-muted">Step 42 / 120</small>
-              </div>
-            </div>
-            
-            <div className="d-flex align-items-end gap-1" style={{ height: '120px' }}>
-              {[30, 70, 40, 90, 60, 20, 50, 80].map((h, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ height: 0 }}
-                  animate={{ height: `${h}%` }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex-grow-1 rounded-top"
-                  style={{ 
-                    backgroundColor: i === 3 || i === 4 ? 'var(--text-primary)' : 'var(--text-secondary)',
-                    opacity: i === 3 || i === 4 ? 1 : 0.5
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
       </motion.div>
 
       <div className="row g-4 mt-5">
@@ -66,7 +37,7 @@ export default function Dashboard() {
           { title: 'Executions', count: '10k+', icon: <CheckCircle2 className="text-info" /> },
         ].map((stat, idx) => (
           <div key={idx} className="col-md-3">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 + (idx * 0.1) }}

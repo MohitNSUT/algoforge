@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Editor from '@monaco-editor/react'
-import { Play, Code2, Terminal as TerminalIcon, Eye } from 'lucide-react'
+import { Play, Code2, Terminal as TerminalIcon, Eye, Sparkles } from 'lucide-react'
 import axios from 'axios'
 import ArrayVisualizer from '../components/ArrayVisualizer.tsx'
 import GraphVisualizer from '../components/GraphVisualizer.tsx'
@@ -77,6 +77,9 @@ export default function Playground() {
   
   const [visualData, setVisualData] = useState<{type: string, steps: any[]}|null>(null)
   const [activeStep, setActiveStep] = useState(0)
+  
+  const [aiAnalysis, setAiAnalysis] = useState<string | null>(null)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLang = e.target.value as keyof typeof LANGUAGES
@@ -133,6 +136,25 @@ export default function Playground() {
     }
   }
 
+  const handleAnalyze = async () => {
+    if (!code.trim()) return
+    setIsAnalyzing(true)
+    setAiAnalysis("Analyzing code complexity with Gemini AI...")
+    
+    try {
+      const res = await axios.post('/api/compiler/analyze', { code })
+      if (res.data.success) {
+        setAiAnalysis(res.data.data)
+      } else {
+        setAiAnalysis(`Error: ${res.data.message}`)
+      }
+    } catch (err: any) {
+      setAiAnalysis(`Error connecting to AI service: ${err.message}`)
+    } finally {
+      setIsAnalyzing(false)
+    }
+  }
+
   return (
     <div className="container-fluid py-3 flex-grow-1 d-flex flex-column w-100">
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -155,9 +177,22 @@ export default function Playground() {
             ))}
           </select>
           <button 
+            className="btn btn-outline-info d-flex align-items-center gap-2 px-3 shadow-sm"
+            onClick={handleAnalyze}
+            disabled={isAnalyzing || isRunning}
+          >
+            {isAnalyzing ? (
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            ) : (
+              <Sparkles size={16} />
+            )}
+            Analyze Complexity
+          </button>
+          
+          <button 
             className="btn btn-primary d-flex align-items-center gap-2 px-4 shadow"
             onClick={runCode}
-            disabled={isRunning}
+            disabled={isRunning || isAnalyzing}
           >
             {isRunning ? (
               <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -222,6 +257,23 @@ export default function Playground() {
                 <button className="btn btn-outline-secondary btn-sm" onClick={() => setActiveStep(prev => Math.max(0, prev - 1))} disabled={activeStep === 0}>Previous</button>
                 <button className="btn btn-primary btn-sm px-4" onClick={() => setActiveStep(prev => Math.min(visualData.steps.length - 1, prev + 1))} disabled={activeStep === visualData.steps.length - 1}>Next</button>
                 <button className="btn btn-outline-secondary btn-sm" onClick={() => setActiveStep(visualData.steps.length - 1)} disabled={activeStep === visualData.steps.length - 1}>Last</button>
+              </div>
+            </div>
+          )}
+
+          {aiAnalysis && (
+            <div className="bg-dark rounded border border-info p-3 d-flex flex-column shadow-lg mb-3" style={{ backgroundColor: 'var(--bg-secondary) !important' }}>
+              <div className="d-flex align-items-center justify-content-between border-bottom border-info pb-2 mb-2">
+                <div className="d-flex align-items-center gap-2 text-info">
+                  <Sparkles size={18} />
+                  <h6 className="mb-0 fw-semibold tracking-wider text-uppercase" style={{ fontSize: '13px' }}>AI Complexity Analysis</h6>
+                </div>
+                <button className="btn btn-sm btn-outline-secondary py-0 px-2" onClick={() => setAiAnalysis(null)} style={{ fontSize: '12px' }}>Close</button>
+              </div>
+              <div className="flex-grow-1 position-relative overflow-auto">
+                <pre className="text-light m-0" style={{ fontSize: '14px', whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>
+                  {aiAnalysis}
+                </pre>
               </div>
             </div>
           )}
