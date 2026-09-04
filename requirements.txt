@@ -1,0 +1,19 @@
+# System Requirements for AlgoForge
+# Note: These are system-level dependencies, not standard pip packages.
+# Please download and install the following on your system to run the platform locally:
+
+# 1. Java JDK 17 or higher (Required for Spring Boot backend)
+# Download: https://adoptium.net/
+
+# 2. Node.js v18 or higher (Required for React/Vite frontend)
+# Download: https://nodejs.org/
+
+# 3. Python 3.x (Required to execute Python code in the Playground)
+# Download: https://www.python.org/downloads/
+
+# 4. GCC / g++ (Required to compile and execute C++ code in the Playground)
+# Download (Mac): Install Xcode Command Line Tools (`xcode-select --install`)
+# Download (Windows): Install MinGW-w64 or MSYS2
+
+# 5. PostgreSQL (Optional: Currently using in-memory/local setup, but required for production DB)
+# Download: https://www.postgresql.org/download/

@@ -1,0 +1,132 @@
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #161616;
+  --bg-tertiary: #222222;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent-primary: #2563eb; /* Bright Blue for high visibility */
+  --accent-secondary: #7c3aed; /* Purple */
+  --accent-hover: #3b82f6;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --border-color: #333333;
+  --glass-bg: #0a0a0a;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom utility overrides */
+.bg-dark {
+  background-color: var(--bg-secondary) !important;
+}
+
+.text-primary {
+  color: var(--accent-primary) !important;
+}
+
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: #444;
+}
+
+.glass-panel {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+/* Monaco Editor Highlights */
+.monaco-highlight-line {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.monaco-highlight-glyph {
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.btn-primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+}
+
+.btn-outline-primary {
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  border-radius: 4px;
+}
+
+.btn-outline-primary:hover {
+  background: var(--bg-tertiary);
+  border-color: #444;
+  color: var(--text-primary);
+}
+
+.btn-dark {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 4px;
+}
+
+.btn-dark:hover {
+  background-color: #222;
+  border-color: #444;
+}
+
+.navbar {
+  background-color: var(--bg-primary) !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
