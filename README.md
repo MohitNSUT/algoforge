@@ -4,7 +4,17 @@
 
 Unlike standard visualization tools, AlgoForge computes algorithms step-by-step on a Java Spring Boot backend, serializes the memory state, and streams the execution timeline to a dynamic React frontend.
 
-![AlgoForge Dashboard](frontend/src/assets/hero.png) *(Note: Add a screenshot of your dashboard here later)*
+<img width="2940" height="1410" alt="image" src="https://github.com/user-attachments/assets/2f867359-da6c-49d4-b5be-60dae7dd7ad6" />
+
+<img width="2918" height="1416" alt="image" src="https://github.com/user-attachments/assets/663c197b-3d28-452f-8bc3-8f00011d7726" />
+
+<img width="2906" height="1574" alt="image" src="https://github.com/user-attachments/assets/2e3ee9a6-02b2-4954-8f4e-d9e30da59b66" />
+
+<img width="2922" height="1396" alt="image" src="https://github.com/user-attachments/assets/968472b5-105c-4cc1-9578-60d8c8cfe826" />
+
+
+
+
 
 ---
 
